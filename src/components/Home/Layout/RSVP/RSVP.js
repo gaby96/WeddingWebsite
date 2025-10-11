@@ -115,7 +115,7 @@ const downloadInvite = async () => {
                 <p><strong>Guest:</strong> {values.name}{values.guest && ` & ${values.guest}`}</p>
                 <p><strong>Message:</strong> {values.message || "We can’t wait to celebrate with you!"}</p>
                 <p className="date">November 15, 2025</p>
-                <p className="venue">Labadi Beach Hotel, Accra</p>
+                <p className="venue">34 Haatso-Atomic Rd, Accra, Ghana</p>
                 </div>
             </div>
         </InviteCard>
