@@ -28,7 +28,7 @@ const downloadInvite = async () => {
 
     // Create PDF (A4 Landscape)
     const pdf = new jsPDF({
-      orientation: "landscape",
+      orientation: "portrait",
       unit: "mm",
       format: "a4",
     });
