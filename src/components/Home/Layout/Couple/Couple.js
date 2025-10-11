@@ -17,7 +17,7 @@ const Couple = () => {
                             <h4>The Bride</h4>
                         </div>
                         <div className="image">
-                            <img src="image/winnie.png" alt="The Bride" />
+                            <img src="image/Winnie.png" alt="The Bride" />
                         </div>
                     </Bride>
                     <Groom>
