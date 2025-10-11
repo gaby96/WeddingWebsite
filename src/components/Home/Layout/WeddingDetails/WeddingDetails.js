@@ -11,29 +11,30 @@ const WeddingDetails = () => {
       </p>
 
       <div className="cards">
+        {/* 💝 Gifting Info */}
         <div className="card">
           <h3>Gifting Information</h3>
           <p>
-            Your presence means the world to us and that's truly the best gift we could ask for! but
-            if you'd like to bless us with a gift, we would be incredibly grateful for a monetary contribution
+            Your presence means the world to us and that's truly the best gift we could ask for! 
+            But if you'd like to bless us with a gift, we would be incredibly grateful for a monetary contribution.
           </p>
           <div className="gift-info">
             <p>
-              <strong>Mobile Money:</strong> 024 123 4567 (Daniel Boye)
+              <strong>Mobile Money:</strong> 020 324 2926 (Daniel Boye)
             </p>
             <p>
-              <strong>Bank Account:</strong> 987654321 – GCB Bank
+              <strong>Bank Account:</strong> 9040004705437 – Stanbic Bank
             </p>
           </div>
         </div>
 
         {/* 👗 Dress Code */}
         <div className="card">
-          <h3>Dress Code</h3>
+          <h3>Event Details</h3>
           <p>
-            Let’s keep it elegant and radiant! We invite our guests to wear{" "}
-            <strong>traditional or semi-formal attire</strong> in harmony with
-            our wedding palette.
+            Let’s keep it elegant and radiant! We invite our guests to dress classy. {" "}
+            <strong>Traditional or semi-formal attire</strong> in harmony with
+            our wedding palette. <strong>Strictly, No Kids!</strong>
           </p>
           <p className="note">Please, no white — let the bride shine! 🤍</p>
         </div>
@@ -62,14 +63,13 @@ const WeddingDetails = () => {
 
 export default WeddingDetails;
 
-// ----------------------
-// 💄 STYLES
-// ----------------------
+// 🎨 Palette
 const WeddingPalette = {
   burntOrange: "#CC5500",
   mustardYellow: "#D4A017",
   brown: "#5C4033",
   cream: "#FAF3E0",
+  gold: "#C6A664",
 };
 
 const DetailsSection = styled.section`
@@ -140,27 +140,60 @@ const DetailsSection = styled.section`
       }
     }
 
+    /* 🎨 Color Swatches Section */
     .colors {
       display: flex;
       justify-content: space-around;
       align-items: center;
       margin-top: 1.5rem;
       flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .color-swatch {
-      width: 100px;
-      height: 100px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
-      color: #fff;
-      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      color: #fff;
+      font-weight: 600;
       font-size: 0.8rem;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-      margin: 0.5rem;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.3),
+                  0 4px 10px rgba(0, 0, 0, 0.15);
+      border: 3px solid ${WeddingPalette.gold};
+      transition: all 0.3s ease;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 70%);
+        pointer-events: none;
+      }
+
+      &:hover {
+        transform: scale(1.07);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      span {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.2;
+        padding: 0 0.5rem;
+      }
     }
 
     .burnt-orange {
@@ -168,6 +201,7 @@ const DetailsSection = styled.section`
     }
     .mustard-yellow {
       background: ${WeddingPalette.mustardYellow};
+      color: #3a2a00; /* Better contrast for bright yellow */
     }
     .brown {
       background: ${WeddingPalette.brown};
