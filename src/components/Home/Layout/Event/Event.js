@@ -15,7 +15,7 @@ const Event = () => {
           <p className="address">
              34 Haatso-Atomic Rd, Accra, Ghana
           </p>
-          <p className="datetime">Saturday, 15th November 2025</p>
+          <p className="datetime">Saturday, 15th November 2025 @ 2:00 PM</p>
 
           <a
             href="https://maps.app.goo.gl/rA71TmkLwAyhvvFdA"
