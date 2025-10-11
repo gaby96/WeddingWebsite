@@ -16,33 +16,53 @@ const RSVP = () => {
   };
 
 const downloadInvite = async () => {
-    const el = document.getElementById("invite-card");
+  const el = document.getElementById("invite-card");
 
-    const canvas = await html2canvas(el, {
-      scale: 3,
-      useCORS: true,
-      backgroundColor: "#fff",
-    });
+  // Capture card as image
+  const canvas = await html2canvas(el, {
+    scale: 3,
+    useCORS: true,
+    backgroundColor: "#fff",
+  });
 
-    const imgData = canvas.toDataURL("image/png");
+  const imgData = canvas.toDataURL("image/png");
 
-    // Create PDF (A4 Landscape)
-    const pdf = new jsPDF({
-      orientation: "portrait",
-      unit: "mm",
-      format: "a4",
-    });
+  // A4 in portrait (you can switch to 'landscape' if needed)
+  const pdf = new jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: "a4",
+  });
 
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
+  // PDF page dimensions (portrait)
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = pdf.internal.pageSize.getHeight();
 
-    const imgWidth = pdfWidth;
-    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-    const yOffset = (pdfHeight - imgHeight) / 2;
+  // Image dimensions (from HTML canvas)
+  const imgWidthPx = canvas.width;
+  const imgHeightPx = canvas.height;
 
-    pdf.addImage(imgData, "PNG", 0, yOffset, imgWidth, imgHeight);
-    pdf.save(`${values.name}-WeddingInvite.pdf`);
-  };
+  // Convert pixels → millimeters (approx. 96 DPI)
+  const pxToMm = 0.264583;
+  const imgWidthMm = imgWidthPx * pxToMm;
+  const imgHeightMm = imgHeightPx * pxToMm;
+
+  // Scale image proportionally to fit inside PDF
+  const ratio = Math.min(pdfWidth / imgWidthMm, pdfHeight / imgHeightMm);
+  const finalWidth = imgWidthMm * ratio;
+  const finalHeight = imgHeightMm * ratio;
+
+  // Center the image on the PDF
+  const xOffset = (pdfWidth - finalWidth) / 2;
+  const yOffset = (pdfHeight - finalHeight) / 2;
+
+  // Add to PDF with correct scaling
+  pdf.addImage(imgData, "PNG", xOffset, yOffset, finalWidth, finalHeight);
+
+  // Save the file
+  pdf.save(`${values.name}-WeddingInvite.pdf`);
+};
+
 
   return (
     <>
