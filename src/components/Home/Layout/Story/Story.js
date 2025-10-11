@@ -1,113 +1,120 @@
-import React from 'react';
-import styled from 'styled-components';
-
+import React from "react";
+import styled from "styled-components";
 
 const Story = () => {
-    return (
-        <div>
-            <Flower>
-                <img src="image/gif/flowers2.gif" alt="Flowers" />
-            </Flower>
+  return (
+    <StorySection>
+      {/* 🌸 Floating Flower Accent */}
+      <Flower>
+        <img src="/image/gif/flowers2.gif" alt="Flowers" />
+      </Flower>
 
-            <StoryContainer>
-                <Box>
-                    <div className="image">
-                        <img src="image/R5PX7232.jpg" alt="couple" />
-                    </div>
-                    <div className="info">
-                        <h4>Wedding Invitation</h4>
-                        <p>Together with their families, Daniel Nii Adjei Boye & Winnie
-                            Nuerki Apenahier request the honor of your presence
-                            at their marriage ceremony
-                        </p>
-                    </div>
-                </Box>
-            </StoryContainer>            
+      {/* 💌 Centered Story Info */}
+      <StoryContainer>
+        <div className="info">
+          <h4>Wedding Invitation</h4>
+          <p>
+            Together with their families, <br />
+            <strong>Daniel Nii Adjei Boye</strong> &{" "}
+            <strong>Winnie Nuerki Apenahier</strong> <br />
+            request the honor of your presence <br />
+            at their marriage ceremony.
+          </p>
         </div>
-    )
-}
+      </StoryContainer>
+    </StorySection>
+  );
+};
 
 export default Story;
 
+/* ---------------- STYLES ---------------- */
 
-const Flower = styled.div `
+/* 🌿 Full Story Section with Background */
+const StorySection = styled.section`
+  position: relative;
+  background: url("/image/dannywinniesit.jpg") no-repeat center 42.4% / cover;
+  padding: 6rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   padding: 0 15px;
-   margin: 5rem auto;
+  /* dark overlay for better visibility */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 0;
+  }
 
+  /* bring content above overlay */
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 
-    img{
-       width: 150px;
-
-        /* @media(min-width:768px){
-           width: 150px;
-        } */
-    }
+  /* ✅ Switch to a mobile-optimized background */
+  @media (max-width: 768px) {
+    background: url("/image/danniesitwin.jpg") no-repeat center center / cover;
+  }
 `;
 
+/* 🌸 Floating Flower */
+const Flower = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
 
+  img {
+    width: 150px;
+    max-width: 40%;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.9;
+  }
 
-const StoryContainer = styled.div `
-
-    max-width: 1140px;
-    margin: 2rem auto;
-    padding: 0 15px;
-
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 `;
-const Box = styled.div `
 
-    display: grid;
-    grid-gap: 2em;
-    
-    @media(min-width:1020px){
-        display: grid;
-        grid-gap: 2em;
-        grid-template-columns: repeat(2, 1fr);
-    
-    } 
+/* 💞 Centered Text Container */
+const StoryContainer = styled.div`
+  max-width: 800px;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.8rem;
 
+  .info {
+    text-align: center;
+  }
 
-    .image{
-        text-align:center;
-        img{
-            width: 100%;
-            @media(min-width:600px){
-                width: 300px;
-                object-fit: cover;
-                text-align: right;
-            } 
-        }
+  h4 {
+    font-family: "Alex Brush", cursive;
+    color: #ffd7a8;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+  }
 
-        @media(min-width:1020px){
-            text-align: right;
-        }
+  p {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-weight: 300;
+    color: #fff;
+
+    strong {
+      color: #ffe8c2;
+      font-weight: 600;
     }
-
-
-    h4{
-        font-family: 'Alex Brush', cursive;
-        color: #CB966A;
-        font-size: 3.7rem;
-    }
-
-
-    h2{
-        margin: 0 0 1.3rem 0;
-    }
-
-    h3{
-        font-size: 1.5rem;
-        font-weight: 500;
-        margin-bottom:.7rem;
-    }
-
-    p{
-        font-size: 1.2rem;
-        font-weight: 200;
-        line-height: 1.4rem;
-        margin-bottom: 1rem;
-    }
+  }
 `;

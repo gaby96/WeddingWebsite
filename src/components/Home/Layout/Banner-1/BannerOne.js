@@ -7,7 +7,7 @@ const BannerOne = () => {
             <Container>
                 <div className="header__content">
                     <img src="image/wedding.png" alt="wedding" />
-                    <h2>Daniel & Winnie</h2>
+                    <h2>Nii & Nuerki</h2>
                 </div>
             </Container>
         </>

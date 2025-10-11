@@ -7,7 +7,7 @@ const Header = () => {
         <>
             <Headers>
                 <div className="header__content">
-                    <h2>Daniel & Winnie</h2>
+                    <h2>Nii & Nuerki</h2>
                 </div>
             </Headers>   
         </>

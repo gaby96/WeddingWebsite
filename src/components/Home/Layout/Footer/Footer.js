@@ -8,7 +8,7 @@ const Footer = () => {
             <FooterContainer>
                 <Box>
                     <img src="image/footer.png" alt="footer" />
-                    <h2>Daniel & Winnie</h2>
+                    <h2>Nii & Nuerki</h2>
                 </Box>
             </FooterContainer>
         </>
