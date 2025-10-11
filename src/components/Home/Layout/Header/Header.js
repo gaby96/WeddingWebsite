@@ -32,7 +32,7 @@ const Headers = styled.div `
         height: 100%;
         top: 0;
         left: 0;
-        background: rgba(0,0,0,0.6);
+        background: rgba(0,0,0,0.3);
         z-index: -1;
     }
 

@@ -68,52 +68,62 @@ const downloadInvite = async () => {
     <>
       <Container>
         <Box>
-          <div className="form__box">
-            <h2>Will You Attend?</h2>
-            <div className="title">R.S.V.P</div>
+            <div className="form__box">
+                <h2>Will You Attend?</h2>
+                <div className="title">R.S.V.P</div>
 
-            <form className="form" onSubmit={handleRSVPSubmit}>
-              <FormDiv>
-                <label htmlFor="name">
-                  Name<span>*</span>
-                </label>
-                <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  value={values.name}
-                  onChange={handleChange}
-                  placeholder="Your full name"
-                />
-              </FormDiv>
+                <form className="form" onSubmit={handleRSVPSubmit}>
+                <FormDiv>
+                    <label htmlFor="name">
+                    Name<span>*</span>
+                    </label>
+                    <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    value={values.name}
+                    onChange={handleChange}
+                    placeholder="Your full name"
+                    />
+                </FormDiv>
 
-              <FormDiv>
-                <label htmlFor="guest">Guest</label>
-                <input
-                  id="guest"
-                  type="text"
-                  name="guest"
-                  value={values.guest}
-                  onChange={handleChange}
-                  placeholder="Guest name (optional)"
-                />
-              </FormDiv>
+                <FormDiv>
+                    <label htmlFor="guest">Guest</label>
+                    <input
+                    id="guest"
+                    type="text"
+                    name="guest"
+                    value={values.guest}
+                    onChange={handleChange}
+                    placeholder="Guest name (optional)"
+                    />
+                </FormDiv>
 
-              <FormDiv>
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={values.message}
-                  onChange={handleChange}
-                  placeholder="Leave a note for the couple"
-                ></textarea>
-              </FormDiv>
+                <FormDiv>
+                    <label htmlFor="message">Message</label>
+                    <textarea
+                    id="message"
+                    name="message"
+                    value={values.message}
+                    onChange={handleChange}
+                    placeholder="Leave a note for the couple"
+                    ></textarea>
+                </FormDiv>
 
-              <Button type="submit">Confirm Attendance</Button>
-            </form>
-          </div>
+                <Button type="submit">Confirm Attendance</Button>
+                </form>
+
+                {/* ✅ NEW CONTACT SECTION */}
+                <ContactSection>
+                <p>Prefer to RSVP directly?</p>
+                <p>
+                    Contact <strong>Mavis</strong> at{" "}
+                    <a href="tel:+233542592262">+233 54 259 2262</a>
+                </p>
+                </ContactSection>
+            </div>
         </Box>
+
       </Container>
 
       {showCard && (
@@ -161,7 +171,7 @@ const fadeIn = keyframes`
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: url("image/banner/banner-2.jpg") center/cover no-repeat;
+  background: url("image/dannywinniesit.jpg") no-repeat center 30%/cover;
   position: relative;
   z-index: 1;
   display: flex;
@@ -420,6 +430,33 @@ const InviteCard = styled.div`
   }
 `;
 
+const ContactSection = styled.div`
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.6;
+  backdrop-filter: blur(8px);
+
+  p {
+    margin: 0.3rem 0;
+  }
+
+  a {
+    color: #f2d5a0;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #d4aa72;
+    }
+  }
+`;
 
 
 

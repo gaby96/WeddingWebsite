@@ -10,7 +10,7 @@ const useForm = (validate) => {
     })
 
     const [error, setError] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [setIsSubmitting] = useState(false)
 
     const handleChange = (e) => {
         const { name, value } = e.target;

@@ -9,7 +9,6 @@ import DotsMemory from './Layout/DotsMemory/DotsMemory';
 import BannerOne from './Layout/Banner-1/BannerOne';
 import Event from './Layout/Event/Event';
 import WeddingDetails from './Layout/WeddingDetails/WeddingDetails';
-import Friend from './Layout/Friend/Friend';
 import Footer from './Layout/Footer/Footer';
 
 
