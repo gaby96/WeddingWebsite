@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import useForm from "./userForm";
 import validate from "./validateInfo";
-import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const RSVP = () => {
   const { handleChange, handleSubmit, values, error } = useForm(validate);
@@ -23,7 +23,10 @@ const downloadInvite = async () => {
       useCORS: true,
       backgroundColor: "#fff",
     });
+
     const imgData = canvas.toDataURL("image/png");
+
+    // Create PDF (A4 Landscape)
     const pdf = new jsPDF({
       orientation: "landscape",
       unit: "mm",
@@ -99,7 +102,7 @@ const downloadInvite = async () => {
             <img
                 src="/image/formwed.jpg"
                 alt=""
-                className="bg-image"
+                className="bg-img"
                 crossOrigin="anonymous"
                 aria-hidden="true"
             />
@@ -287,84 +290,78 @@ const ModalOverlay = styled.div`
 
 const InviteCard = styled.div`
   position: relative;
-  width: 90vw; /* responsive width */
-  max-width: 1000px;
-  aspect-ratio: 10 / 7; /* maintain landscape shape */
+  width: 90vw;
+  max-width: 650px; /* smaller width for portrait layout */
+  aspect-ratio: 3 / 4; /* portrait shape */
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 0 15px 60px rgba(0, 0, 0, 0.3);
   background-color: #fffaf4;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  /* Background image */
-  .bg-image {
+  /* --- Background Image --- */
+  .bg-img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    pointer-events: none;
     z-index: 0;
+    pointer-events: none;
   }
 
+  /* --- Center Content --- */
   .content {
     position: relative;
     z-index: 1;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    width: 100%;
     height: 100%;
-    padding: clamp(1.5rem, 3vw, 4rem) clamp(1.5rem, 5vw, 6rem);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: left;
-    transform: translateX(-2vw);
-
-    @media (max-width: 768px) {
-      align-items: center;
-      text-align: center;
-      transform: translateX(0);
-    }
+    align-items: center;
+    justify-content: center; /* center vertically */
+    text-align: center;
   }
 
+  /* --- Heading --- */
   h2 {
     font-family: "Alex Brush", cursive;
-    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     color: #b4884d;
     margin-bottom: 0.8rem;
   }
 
+  /* --- Names --- */
   .names {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
     font-weight: 700;
     color: #4b2e15;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.5rem;
   }
 
+  /* --- Details --- */
   .details {
-    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-size: clamp(1rem, 2.8vw, 1.3rem);
     color: #3e2a1f;
     line-height: clamp(1.4rem, 3vw, 2rem);
-    max-width: 70%;
-
-    @media (max-width: 768px) {
-      max-width: 90%;
-    }
-
-    @media (max-width: 480px) {
-      max-width: 95%;
-    }
+    width: 85%;
+    max-width: 90%;
   }
 
   .details p {
-    margin: 0.5rem 0;
+    margin: 0.6rem 0;
   }
 
   .date,
   .venue {
     font-weight: 600;
     color: #593b27;
-    margin-top: 0.8rem;
+    margin-top: 1rem;
   }
 
   .date::before {
@@ -373,6 +370,33 @@ const InviteCard = styled.div`
 
   .venue::before {
     content: "📍 ";
+  }
+
+  /* --- Responsive Fine-Tuning --- */
+  @media (max-width: 768px) {
+    max-width: 90vw;
+    h2 {
+      font-size: clamp(1.8rem, 6vw, 2.8rem);
+    }
+    .details {
+      width: 90%;
+      font-size: clamp(0.95rem, 3vw, 1.2rem);
+      line-height: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 15px;
+    h2 {
+      font-size: 2rem;
+    }
+    .names {
+      font-size: 1.6rem;
+    }
+    .details {
+      font-size: 1rem;
+      width: 95%;
+    }
   }
 `;
 
