@@ -17,12 +17,12 @@ const Couple = () => {
                             <h4>The Bride</h4>
                         </div>
                         <div className="image">
-                            <img src="image/bride.jpg" alt="The Bride" />
+                            <img src="image/winnie.png" alt="The Bride" />
                         </div>
                     </Bride>
                     <Groom>
                         <div className="image">
-                            <img src="image/groom.jpg" alt="The Groom" />
+                            <img src="image/Danny.jpg" alt="The Groom" />
                         </div>
                         <div className="info">
                             <h2>Daniel Nii Adjei Boye</h2>

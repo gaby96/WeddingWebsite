@@ -6,24 +6,23 @@ const DotsSection = () => {
     <DotsContainer>
       <h2>Share Your Memories</h2>
       <p className="subtitle">
-        Upload your favorite wedding photos and videos through Dots The App.
+        Scan the QR code below to upload your favorite wedding photos and videos
+        through Dots The App.
       </p>
-
-      {/* 🔹 Embedded Dots iframe (replace the link below with your real Dots event URL) */}
-      <iframe
-        src="https://web.dotstheapp.com/event/abc123"
-        title="Wedding Memories"
-        allow="camera; microphone; clipboard-write"
-      ></iframe>
+      <img
+        src="/image/qrcodedanny.jpg"
+        alt="Dots The App QR Code"
+        className="qr-code"
+      />
 
       <p className="fallback">
-        If the gallery doesn’t load, visit{" "}
+        Or click{" "}
         <a
           href="https://web.dotstheapp.com/event/abc123"
           target="_blank"
           rel="noopener noreferrer"
         >
-          our Dots album here
+          here to open our Dots album
         </a>.
       </p>
     </DotsContainer>
@@ -52,13 +51,18 @@ const DotsContainer = styled.section`
     margin: 0 auto 2rem auto;
   }
 
-  iframe {
-    width: 100%;
-    max-width: 900px;
-    height: 700px;
-    border: none;
+  .qr-code {
+    width: 240px;
+    height: 240px;
     border-radius: 12px;
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   .fallback {
@@ -85,8 +89,9 @@ const DotsContainer = styled.section`
       font-size: 2.2rem;
     }
 
-    iframe {
-      height: 500px;
+    .qr-code {
+      width: 200px;
+      height: 200px;
     }
   }
 `;

@@ -61,7 +61,6 @@ const Navbar = () => {
                             <li><a href="#couple">Couple</a></li>
                             <li><a href="#ourStory">Our Story</a></li>
                             <li><a href="#event">Event</a></li>
-                            {/* <li><a href="#friend">Friends</a></li> */}
                             <li><a href="#gallery">Gallery</a></li>
                             <li><a href="#rsvp">R.S.V.P</a></li>
                         </ul>
