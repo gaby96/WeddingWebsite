@@ -234,8 +234,8 @@ const Logo = styled.div`
   }
 
   @media (max-width: 920px) {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 `;
 
