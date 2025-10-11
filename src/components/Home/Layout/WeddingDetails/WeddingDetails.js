@@ -23,7 +23,7 @@ const WeddingDetails = () => {
               <strong>Mobile Money:</strong> 020 324 2926 (Daniel Boye)
             </p>
             <p>
-              <strong>Bank Account:</strong> 9040004705437 – Stanbic Bank
+              <strong>Bank Account:</strong> Winnie Apenahier {' '} <strong>9040004705437 – Stanbic Bank</strong>
             </p>
           </div>
         </div>
