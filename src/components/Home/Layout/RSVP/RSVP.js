@@ -98,7 +98,21 @@ const downloadInvite = async () => {
                     placeholder="Guest name (optional)"
                     />
                 </FormDiv>
-
+                <FormDiv>
+                    <label htmlFor="side">
+                        Who are you responding for?<span>*</span>
+                    </label>
+                    <select
+                        id="side"
+                        name="side"
+                        value={values.side}
+                        onChange={handleChange}
+                    >
+                        <option value="">Select an option</option>
+                        <option value="bride">Bride</option>
+                        <option value="groom">Groom</option>
+                    </select>
+                    </FormDiv>
                 <FormDiv>
                     <label htmlFor="message">Message</label>
                     <textarea
@@ -139,13 +153,14 @@ const downloadInvite = async () => {
 
             <div className="content">
                 <h2>You're Invited!</h2>
-                <p className="names">Daniel & Winnie</p>
+                <p className="names">Nii & Nuerki</p>
                 
                 <div className="details">
-                <p><strong>Guest:</strong> {values.name}{values.guest && ` & ${values.guest}`}</p>
-                <p><strong>Message:</strong> {values.message || "We can’t wait to celebrate with you!"}</p>
-                <p className="date">November 15, 2025</p>
-                <p className="venue">34 Haatso-Atomic Rd, Accra, Ghana</p>
+                    <p><strong>Guest:</strong> {values.name}{values.guest && ` & ${values.guest}`}</p>
+                    <p><strong>RSVP for:</strong> {values.side ? values.side.charAt(0).toUpperCase() + values.side.slice(1) : "—"}</p>
+                    <p><strong>Message:</strong> {values.message || "We can’t wait to celebrate with you!"}</p>
+                    <p className="date">November 15, 2025</p>
+                    <p className="venue">34 Haatso-Atomic Rd, Accra, Ghana</p>
                 </div>
             </div>
         </InviteCard>
@@ -243,7 +258,8 @@ const FormDiv = styled.div`
   }
 
   input,
-  textarea {
+  textarea,
+  select {
     font-size: 1rem;
     padding: 0.8rem;
     border-radius: 8px;
@@ -263,6 +279,7 @@ const FormDiv = styled.div`
     height: 100px;
   }
 `;
+
 
 const Button = styled.button`
   width: 100%;
@@ -372,6 +389,7 @@ const InviteCard = styled.div`
     font-weight: 700;
     color: #4b2e15;
     margin-bottom: 1.5rem;
+    font-family: "Alex Brush", cursive;
   }
 
   /* --- Details --- */
