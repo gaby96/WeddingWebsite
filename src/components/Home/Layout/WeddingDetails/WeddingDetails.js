@@ -235,7 +235,6 @@ const DetailsSection = styled.section`
   /* 📱 Mobile Adjustments */
   @media (max-width: 768px) {
     background: 
-      linear-gradient(180deg, rgba(250, 243, 224, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%),
       url("/image/R5PX7392.jpg") center center / cover no-repeat;
     h2 {
       font-size: 2.4rem;
