@@ -21,7 +21,7 @@ const Container = styled.div `
 
     width: 100%;
     height: 60vh;
-    background: url('image/DannyWinnie.jpg') center 35%/cover;
+    background: url('image//savethedate.jpg') center top/cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;

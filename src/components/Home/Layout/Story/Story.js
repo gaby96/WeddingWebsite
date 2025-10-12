@@ -33,8 +33,8 @@ export default Story;
 /* 🌿 Full Story Section with Background */
 const StorySection = styled.section`
   position: relative;
-  background: url("/image/dannywinniesit.jpg") no-repeat center 42.4% / cover;
-  padding: 6rem 1.5rem;
+  background: url("/image/dannywinniesit.jpg") no-repeat center 46% / cover;
+  padding: clamp(4rem, 6vw, 8rem) 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,9 +55,19 @@ const StorySection = styled.section`
     z-index: 1;
   }
 
-  /* ✅ Switch to a mobile-optimized background */
+  /* ✅ Mobile (Phones & small tablets) */
   @media (max-width: 768px) {
     background: url("/image/danniesitwin.jpg") no-repeat center center / cover;
+  }
+
+  /* ✅ Large desktops (Full HD and up) */
+  @media screen and (min-width: 1441px) and (max-width: 1920px) {
+    background: url("/image/dannywinniesit.jpg") no-repeat center 46.5% / cover;
+  }
+
+  /* ✅ Ultra-wide screens (4K and beyond) */
+  @media screen and (min-width: 1921px) {
+    background: url("/image/dannywinniesit.jpg") no-repeat center 43.4% / cover;
   }
 `;
 
