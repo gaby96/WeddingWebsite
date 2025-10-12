@@ -17,8 +17,6 @@ const RSVP = () => {
 
 const downloadInvite = async () => {
   const el = document.getElementById("invite-card");
-
-  // Capture card as image
   const canvas = await html2canvas(el, {
     scale: 3,
     useCORS: true,
@@ -152,7 +150,7 @@ const downloadInvite = async () => {
             />
 
             <div className="content">
-                <h2>You're Invited!</h2>
+                <h2>Invitation Card</h2>
                 <p className="names">Nii & Nuerki</p>
                 
                 <div className="details">
