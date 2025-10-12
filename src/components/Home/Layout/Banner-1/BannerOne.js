@@ -62,4 +62,8 @@ const Container = styled.div `
         }
     }
 
+      /* ✅ Mobile (Phones & small tablets) */
+  @media (max-width: 768px) {
+    background: url("image/savethedate.jpg") no-repeat center center / cover;
 `;
+
