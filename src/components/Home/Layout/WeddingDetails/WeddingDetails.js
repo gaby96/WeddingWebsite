@@ -106,7 +106,7 @@ const DetailsSection = styled.section`
 
   .intro {
     color: ${WeddingPalette.cream};;
-    font-size: 1.7rem;
+    font-size: 1.0rem;
     max-width: 700px;
     margin: 0 auto 3rem auto;
   }
