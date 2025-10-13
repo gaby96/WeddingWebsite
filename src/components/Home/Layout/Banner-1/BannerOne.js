@@ -6,7 +6,7 @@ const BannerOne = () => {
         <>
             <Container>
                 <div className="header__content">
-                    <img src="image/wedding.png" alt="wedding" />
+                    
                     <h2>Nii & Nuerki</h2>
                 </div>
             </Container>
@@ -64,6 +64,11 @@ const Container = styled.div `
 
       /* ✅ Mobile (Phones & small tablets) */
   @media (max-width: 768px) {
-    background: url("image/savethedate.jpg") no-repeat center center / cover;
+    background: url("image/savethedate.jpg") no-repeat center 5% / cover;
+    }
+
+    @media(max-width: 375px) {
+    background: url("image/savethedatemobile.jpg") no-repeat center 50%/ cover;
+    }
 `;
 
