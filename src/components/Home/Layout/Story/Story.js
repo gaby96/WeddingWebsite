@@ -62,12 +62,12 @@ const StorySection = styled.section`
 
   /* ✅ Large desktops (Full HD and up) */
   @media screen and (min-width: 1441px) and (max-width: 1920px) {
-    background: url("/image/dannywinniesit.jpg") no-repeat center 46.5% / cover;
+    background: url("/image/danniesitwin.jpg") no-repeat center 21.5% / cover;
   }
 
   /* ✅ Ultra-wide screens (4K and beyond) */
   @media screen and (min-width: 1921px) {
-    background: url("/image/dannywinniesit.jpg") no-repeat center 43.4% / cover;
+    background: url("/image/danniesitwin.jpg") no-repeat center 21.4% / cover;
   }
 `;
 
