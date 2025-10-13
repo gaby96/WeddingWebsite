@@ -33,7 +33,7 @@ export default Story;
 /* 🌿 Full Story Section with Background */
 const StorySection = styled.section`
   position: relative;
-  background: url("/image/dannywinniesit.jpg") no-repeat center 46% / cover;
+  background: url("/image/danniesitwin.jpg") no-repeat center 21.5% / cover;
   padding: clamp(4rem, 6vw, 8rem) 1.5rem;
   display: flex;
   flex-direction: column;
