@@ -64,7 +64,7 @@ const Container = styled.div `
 
       /* ✅ Mobile (Phones & small tablets) */
   @media (max-width: 768px) {
-    background: url("image/savethedate.jpg") no-repeat center 5% / cover;
+    background: url("image/savethedatemobile.jpg") no-repeat center 5% / cover;
     }
 
     @media(max-width: 375px) {
