@@ -6,8 +6,6 @@ const BannerOne = () => {
         <>
             <Container>
                 <div className="header__content">
-                    
-                    <h2>Nii & Nuerki</h2>
                 </div>
             </Container>
         </>
@@ -20,9 +18,8 @@ export default BannerOne;
 const Container = styled.div `
 
     width: 100%;
-    height: 60vh;
-    background: url('image/savethedate.jpg') center top/cover;
-    background-attachment: fixed;
+    height: 100%;
+    background: url('image/savethedate.jpg') no-repeat center 0% / cover;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -62,13 +59,12 @@ const Container = styled.div `
         }
     }
 
-      /* ✅ Mobile (Phones & small tablets) */
   @media (max-width: 768px) {
-    background: url("image/savethedatemobile.jpg") no-repeat center 5% / cover;
+    background: url("image/savethedate.jpg") no-repeat center 40% / cover;
     }
 
     @media(max-width: 375px) {
-    background: url("image/savethedatemobile.jpg") no-repeat center 50%/ cover;
+    background: url("image/savethedate.jpg") no-repeat center 40%/ cover;
     }
 `;
 
