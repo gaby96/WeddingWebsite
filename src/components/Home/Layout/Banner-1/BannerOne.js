@@ -60,7 +60,8 @@ const Container = styled.div `
     }
 
   @media (max-width: 768px) {
-    background: url("image/savethedate.jpg") no-repeat center 10% / cover;
+    background: url("image/savethedate.jpg") no-repeat center 40% / cover;
+     height : 600px;
     }
 
     @media(max-width: 375px) {
