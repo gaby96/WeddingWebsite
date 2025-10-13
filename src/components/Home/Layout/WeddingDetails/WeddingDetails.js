@@ -232,7 +232,7 @@ const DetailsSection = styled.section`
     }
   }
 
-  /* 📱 Mobile Adjustments */
+  /* Mobile Adjustments */
   @media (max-width: 768px) {
     background: 
       url("/image/R5PX7392.jpg") center center / cover no-repeat;
