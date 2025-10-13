@@ -60,11 +60,12 @@ const Container = styled.div `
     }
 
   @media (max-width: 768px) {
-    background: url("image/savethedate.jpg") no-repeat center 40% / cover;
+    background: url("image/savethedate.jpg") no-repeat center 10% / cover;
     }
 
     @media(max-width: 375px) {
-    background: url("image/savethedate.jpg") no-repeat center 40%/ cover;
+    background: url("image/savethedate.jpg") no-repeat center 20%/ cover;
+    height : 490px;
     }
 `;
 
