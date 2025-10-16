@@ -454,6 +454,7 @@ const InviteCard = styled.div`
     width: 500px;
     height: 250px;
     border-radius: 16px;
+    transform: translateX(-4%);
 
     .content {
       padding: 1.5rem;
