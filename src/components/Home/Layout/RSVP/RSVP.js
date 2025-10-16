@@ -15,153 +15,151 @@ const RSVP = () => {
     if (values.name && !error.name) setShowCard(true);
   };
 
-const downloadInvite = async () => {
-  const el = document.getElementById("invite-card");
-  const canvas = await html2canvas(el, {
-    scale: 3,
-    useCORS: true,
-    backgroundColor: "#fff",
-  });
+  const downloadInvite = async () => {
+    const el = document.getElementById("invite-card");
+    const canvas = await html2canvas(el, {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: "#fff",
+    });
 
-  const imgData = canvas.toDataURL("image/png");
+    const imgData = canvas.toDataURL("image/png");
 
-  // A4 in portrait (you can switch to 'landscape' if needed)
-  const pdf = new jsPDF({
-    orientation: "portrait",
-    unit: "mm",
-    format: "a4",
-  });
+    // A4 in portrait (you can switch to 'landscape' if needed)
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+    });
 
-  // PDF page dimensions (portrait)
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = pdf.internal.pageSize.getHeight();
+    // PDF page dimensions (portrait)
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
 
-  // Image dimensions (from HTML canvas)
-  const imgWidthPx = canvas.width;
-  const imgHeightPx = canvas.height;
+    // Image dimensions (from HTML canvas)
+    const imgWidthPx = canvas.width;
+    const imgHeightPx = canvas.height;
 
-  // Convert pixels → millimeters (approx. 96 DPI)
-  const pxToMm = 0.264583;
-  const imgWidthMm = imgWidthPx * pxToMm;
-  const imgHeightMm = imgHeightPx * pxToMm;
+    // Convert pixels → millimeters (approx. 96 DPI)
+    const pxToMm = 0.264583;
+    const imgWidthMm = imgWidthPx * pxToMm;
+    const imgHeightMm = imgHeightPx * pxToMm;
 
-  // Scale image proportionally to fit inside PDF
-  const ratio = Math.min(pdfWidth / imgWidthMm, pdfHeight / imgHeightMm);
-  const finalWidth = imgWidthMm * ratio;
-  const finalHeight = imgHeightMm * ratio;
+    // Scale image proportionally to fit inside PDF
+    const ratio = Math.min(pdfWidth / imgWidthMm, pdfHeight / imgHeightMm);
+    const finalWidth = imgWidthMm * ratio;
+    const finalHeight = imgHeightMm * ratio;
 
-  // Center the image on the PDF
-  const xOffset = (pdfWidth - finalWidth) / 2;
-  const yOffset = (pdfHeight - finalHeight) / 2;
+    // Center the image on the PDF
+    const xOffset = (pdfWidth - finalWidth) / 2;
+    const yOffset = (pdfHeight - finalHeight) / 2;
 
-  // Add to PDF with correct scaling
-  pdf.addImage(imgData, "PNG", xOffset, yOffset, finalWidth, finalHeight);
+    // Add to PDF with correct scaling
+    pdf.addImage(imgData, "PNG", xOffset, yOffset, finalWidth, finalHeight);
 
-  // Save the file
-  pdf.save(`${values.name}-WeddingInvite.pdf`);
-};
-
+    // Save the file
+    pdf.save(`${values.name}-WeddingInvite.pdf`);
+  };
 
   return (
     <>
       <Container>
         <Box>
-            <div className="form__box">
-                <h2>Will You Attend?</h2>
-                <div className="title">R.S.V.P</div>
+          <div className="form__box">
+            <h2>Will You Attend?</h2>
+            <div className="title">R.S.V.P</div>
 
-                <form className="form" onSubmit={handleRSVPSubmit}>
-                <FormDiv>
-                    <label htmlFor="name">
-                    Name<span>*</span>
-                    </label>
-                    <input
-                    id="name"
-                    type="text"
-                    name="name"
-                    value={values.name}
-                    onChange={handleChange}
-                    placeholder="Your full name"
-                    />
-                </FormDiv>
+            <form className="form" onSubmit={handleRSVPSubmit}>
+              <FormDiv>
+                <label htmlFor="name">
+                  Name<span>*</span>
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  value={values.name}
+                  onChange={handleChange}
+                  placeholder="Your full name"
+                />
+              </FormDiv>
 
-                <FormDiv>
-                    <label htmlFor="guest">Guest</label>
-                    <input
-                    id="guest"
-                    type="text"
-                    name="guest"
-                    value={values.guest}
-                    onChange={handleChange}
-                    placeholder="Guest name (optional)"
-                    />
-                </FormDiv>
-                <FormDiv>
-                    <label htmlFor="side">
-                        Who are you responding for?<span>*</span>
-                    </label>
-                    <select
-                        id="side"
-                        name="side"
-                        value={values.side}
-                        onChange={handleChange}
-                    >
-                        <option value="">Select an option</option>
-                        <option value="bride">Bride</option>
-                        <option value="groom">Groom</option>
-                    </select>
-                    </FormDiv>
-                <FormDiv>
-                    <label htmlFor="message">Message</label>
-                    <textarea
-                    id="message"
-                    name="message"
-                    value={values.message}
-                    onChange={handleChange}
-                    placeholder="Leave a note for the couple"
-                    ></textarea>
-                </FormDiv>
+              <FormDiv>
+                <label htmlFor="side">
+                  Who are you responding for?<span>*</span>
+                </label>
+                <select
+                  id="side"
+                  name="side"
+                  value={values.side}
+                  onChange={handleChange}
+                >
+                  <option value="">Select an option</option>
+                  <option value="bride">Bride</option>
+                  <option value="groom">Groom</option>
+                </select>
+              </FormDiv>
+              {/* <FormDiv>
+                <label htmlFor="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={values.message}
+                  onChange={handleChange}
+                  placeholder="Leave a note for the couple"
+                ></textarea>
+              </FormDiv> */}
 
-                <Button type="submit">Confirm Attendance</Button>
-                </form>
+              <Button type="submit">Confirm Attendance</Button>
+            </form>
 
-                {/* ✅ NEW CONTACT SECTION */}
-                <ContactSection>
-                <p>Prefer to RSVP directly?</p>
-                <p>
-                    Contact <strong>Mavis</strong> at{" "}
-                    <a href="tel:+233542592262">+233 54 259 2262</a>
-                </p>
-                </ContactSection>
-            </div>
+            {/* ✅ NEW CONTACT SECTION */}
+            <ContactSection>
+              <p>Prefer to RSVP directly?</p>
+              <p>
+                Contact <strong>Mavis</strong> at{" "}
+                <a href="tel:+233542592262">+233 54 259 2262</a>
+              </p>
+            </ContactSection>
+          </div>
         </Box>
-
       </Container>
 
       {showCard && (
         <ModalOverlay>
           <InviteCard id="invite-card">
             <img
-                src="/image/formwed.jpg"
-                alt=""
-                className="bg-img"
-                crossOrigin="anonymous"
-                aria-hidden="true"
+              src="/image/wedform.png"
+              alt=""
+              className="bg-img "
+              crossOrigin="anonymous"
+              aria-hidden="true"
             />
 
             <div className="content">
-                <h2>Invitation Card</h2>
-                <p className="names">Nii & Nuerki</p>
-                
-                <div className="details">
-                    <p><strong>Guest:</strong> {values.name}{values.guest && ` & ${values.guest}`}</p>
-                    <p><strong>RSVP for:</strong> {values.side ? values.side.charAt(0).toUpperCase() + values.side.slice(1) : "—"}</p>
-                    <p><strong>Message:</strong> {values.message || "We can’t wait to celebrate with you!"}</p>
-                    <p className="date">November 15, 2025</p>
-                    <p className="venue">34 Haatso-Atomic Rd, Accra, Ghana</p>
-                </div>
+              <h2>Invitation Card</h2>
+              <p className="names">Nii & Nuerki</p>
+
+              <div className="details">
+                <p className="">
+                  <strong>Name:</strong> {values.name}
+                  {values.guest && ` & ${values.guest}`}
+                </p>
+                <p>
+                  <strong>RSVP for:</strong>{" "}
+                  {values.side
+                    ? values.side.charAt(0).toUpperCase() + values.side.slice(1)
+                    : "—"}
+                </p>
+                {/* <p>
+                  <strong>Message:</strong>{" "}
+                  {values.message || "We can’t wait to celebrate with you!"}
+                </p> */}
+                {/* <p className="date">November 15, 2025</p>
+                <p className="venue">34 Haatso-Atomic Rd, Accra, Ghana</p> */}
+              </div>
             </div>
-        </InviteCard>
+          </InviteCard>
           <div className="modal-buttons">
             <button onClick={downloadInvite}>Download Invite</button>
             <button onClick={() => setShowCard(false)}>Close</button>
@@ -184,7 +182,7 @@ const fadeIn = keyframes`
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: url("image/dannywinniesit.jpg") no-repeat center 30%/cover;
+  background: url("image/dannywinniesit.jpg") no-repeat center 30% / cover;
   position: relative;
   z-index: 1;
   display: flex;
@@ -277,7 +275,6 @@ const FormDiv = styled.div`
     height: 100px;
   }
 `;
-
 
 const Button = styled.button`
   width: 100%;
@@ -400,23 +397,23 @@ const InviteCard = styled.div`
   }
 
   .details p {
-    margin: 0.6rem 0;
+    margin: 1rem 0;
   }
 
-  .date,
-  .venue {
-    font-weight: 600;
-    color: #593b27;
-    margin-top: 1rem;
-  }
+  // .date,
+  // .venue {
+  //   font-weight: 600;
+  //   color: #593b27;
+  //   margin-top: 1rem;
+  // }
 
-  .date::before {
-    content: "📅 ";
-  }
+  // .date::before {
+  //   content: "📅 ";
+  // }
 
-  .venue::before {
-    content: "📍 ";
-  }
+  // .venue::before {
+  //   content: "📍 ";
+  // }
 
   /* --- Responsive Fine-Tuning --- */
   @media (max-width: 768px) {
@@ -473,6 +470,3 @@ const ContactSection = styled.div`
     }
   }
 `;
-
-
-
