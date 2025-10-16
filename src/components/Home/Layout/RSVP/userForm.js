@@ -1,36 +1,29 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const useForm = (validate) => {
+  const [values, setValues] = useState({
+    name: "",
+    side: ",",
+  });
 
+  const [error, setError] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const [values, setValues] = useState({
-        name: '',
-        guest: '',
-        message: '',
-        side: ','
-    })
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-    const [error, setError] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false)
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(validate(values));
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-
-        setValues({
-            ...values,
-            [name]: value
-        })
-    }
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        setIsSubmitting(true)
-        setError(validate(values));
-        
-    }
-
-
-
-    return { handleChange, handleSubmit, values, error}
-}
+  return { handleChange, handleSubmit, values, error };
+};
 
 export default useForm;
