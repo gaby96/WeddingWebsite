@@ -138,7 +138,7 @@ const RSVP = () => {
             <div className="content">
 
               <div className="details">
-                <p className="">
+                <p>
                   <strong>Name:</strong> {values.name}
                   {values.guest && ` & ${values.guest}`}
                 </p>
@@ -148,12 +148,7 @@ const RSVP = () => {
                     ? values.side.charAt(0).toUpperCase() + values.side.slice(1)
                     : "—"}
                 </p>
-                {/* <p>
-                  <strong>Message:</strong>{" "}
-                  {values.message || "We can’t wait to celebrate with you!"}
-                </p> */}
-                {/* <p className="date">November 15, 2025</p>
-                <p className="venue">34 Haatso-Atomic Rd, Accra, Ghana</p> */}
+
               </div>
             </div>
           </InviteCard>
@@ -296,26 +291,43 @@ const Button = styled.button`
 const ModalOverlay = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(17, 17, 17, 0.8);
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 17, 17, 0.75);
+  backdrop-filter: blur(6px); /* ✨ subtle glass effect */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 9999;
   animation: ${fadeIn} 0.4s ease;
+  padding: 3rem 2rem; /* increased spacing on sides */
+
+  /* 💡 Wider layout for large screens */
+  @media (min-width: 1024px) {
+    padding: 5rem 6rem;
+  }
+
+  /* allow children (InviteCard + buttons) to align nicely */
+  & > * {
+    max-width: 100%;
+  }
 
   .modal-buttons {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
 
     button {
-      padding: 0.8rem 1.4rem;
+      padding: 1rem 2rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       background: linear-gradient(135deg, #cb966a, #a97b4f);
       color: white;
       font-weight: 600;
+      font-size: 1.05rem;
       cursor: pointer;
       transition: all 0.3s ease;
 
@@ -327,19 +339,23 @@ const ModalOverlay = styled.div`
   }
 `;
 
+
+
 const InviteCard = styled.div`
   position: relative;
-  width: 90vw;
-  max-width: 650px; /* smaller width for portrait layout */
-  aspect-ratio: 3 / 4; /* portrait shape */
+  width: 720px;
+  height: 500px;
+  max-width: 850px;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
-  border-radius: 20px;
-  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.3);
+  border-radius: 24px;
+  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.35);
   background-color: #fffaf4;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.4s ease;
 
   /* --- Background Image --- */
   .bg-img {
@@ -351,94 +367,139 @@ const InviteCard = styled.div`
     object-position: center;
     z-index: 0;
     pointer-events: none;
+    opacity: 0.9;
+    filter: brightness(0.98) contrast(1.05);
   }
 
-  /* --- Center Content --- */
+  /* --- Inner Content --- */
   .content {
     position: relative;
     z-index: 1;
-    padding: clamp(1.5rem, 5vw, 3rem);
+    padding: clamp(1.5rem, 4vw, 3rem);
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* center vertically */
+    justify-content: center;
     text-align: center;
   }
 
   /* --- Heading --- */
   h2 {
     font-family: "Alex Brush", cursive;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 5vw, 3.8rem);
     color: #b4884d;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
   }
 
   /* --- Names --- */
   .names {
-    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+    font-family: "Alex Brush", cursive;
+    font-size: clamp(1.8rem, 4.5vw, 2.8rem);
     font-weight: 700;
     color: #4b2e15;
-    margin-bottom: 1.5rem;
-    font-family: "Alex Brush", cursive;
+    margin-bottom: 1.2rem;
   }
 
   /* --- Details --- */
   .details {
-    font-size: clamp(1rem, 2.8vw, 1.3rem);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
     color: #3e2a1f;
-    line-height: clamp(1.4rem, 3vw, 2rem);
+    line-height: clamp(1.4rem, 3vw, 2.2rem);
     width: 85%;
     max-width: 90%;
+    margin: 0 auto;
   }
 
   .details p {
-    margin: 1rem 0;
+    margin: 0.8rem 0;
   }
 
-  // .date,
-  // .venue {
-  //   font-weight: 600;
-  //   color: #593b27;
-  //   margin-top: 1rem;
-  // }
+  /* ----------------- RESPONSIVE BREAKPOINTS ----------------- */
 
-  // .date::before {
-  //   content: "📅 ";
-  // }
+  /* Tablets / small laptops */
+  @media (max-width: 1024px) {
+    aspect-ratio: 4 / 5;
+    max-width: 720px;
+  }
 
-  // .venue::before {
-  //   content: "📍 ";
-  // }
-
-  /* --- Responsive Fine-Tuning --- */
+  /* Standard mobile sizes (e.g., iPhone 12, Galaxy S) */
   @media (max-width: 768px) {
-    max-width: 90vw;
-    h2 {
-      font-size: clamp(1.8rem, 6vw, 2.8rem);
+    aspect-ratio: 3 / 4.2;
+    max-width: 92vw;
+    border-radius: 20px;
+
+    .content {
+      padding: 2rem;
     }
+
+    h2 {
+      font-size: clamp(1.8rem, 6vw, 3rem);
+    }
+
+    .names {
+      font-size: clamp(1.6rem, 6vw, 2.4rem);
+    }
+
     .details {
       width: 90%;
-      font-size: clamp(0.95rem, 3vw, 1.2rem);
-      line-height: 1.5rem;
+      font-size: clamp(0.95rem, 4vw, 1.2rem);
     }
   }
 
-  @media (max-width: 480px) {
-    border-radius: 15px;
-    h2 {
-      font-size: 2rem;
+  /* ✅ iPhone 6/7/8 Plus (414 px × 736 px) */
+  @media (max-width: 430px) and (max-height: 750px) {
+    aspect-ratio: 2.9 / 4; /* slightly taller */
+    width: 500px;
+    height: 250px;
+    border-radius: 16px;
+
+    .content {
+      padding: 1.5rem;
+      justify-content: space-evenly;
     }
+
+    h2 {
+      font-size: 1.9rem;
+      margin-bottom: 0.6rem;
+    }
+
     .names {
       font-size: 1.6rem;
+      margin-bottom: 0.8rem;
     }
+
+    .details p {
+        margin: 0.3rem 0; /* default smaller spacing */
+        }
+  }
+
+  /* Very small devices (iPhone SE 2, XR in zoom mode) */
+  @media (max-width: 380px) {
+    aspect-ratio: 2.8 / 4;
+    border-radius: 14px;
+
+    .content {
+      padding: 1.2rem;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+    }
+
+    .names {
+      font-size: 1.4rem;
+    }
+
     .details {
-      font-size: 1rem;
-      width: 95%;
+      font-size: 0.7rem;
+      width: 96%;
     }
   }
 `;
+
+
 
 const ContactSection = styled.div`
   margin-top: 2rem;
