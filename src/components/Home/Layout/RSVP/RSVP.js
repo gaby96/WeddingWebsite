@@ -16,49 +16,51 @@ const RSVP = () => {
   };
 
   const downloadInvite = async () => {
-    const el = document.getElementById("invite-card");
-    const canvas = await html2canvas(el, {
-      scale: 5,
-      useCORS: true,
-    });
+  const el = document.getElementById("invite-card");
 
-    const imgData = canvas.toDataURL("image/png");
+  // Capture the invite card exactly as displayed
+  const canvas = await html2canvas(el, {
+    scale: 4, // high quality
+    useCORS: true,
+    backgroundColor: null, // 🟡 this removes the white background
+  });
 
-    // A4 in portrait (you can switch to 'landscape' if needed)
-    const pdf = new jsPDF({
-      orientation: "portrait",
-      unit: "mm",
-      format: "a4",
-    });
+  const imgData = canvas.toDataURL("image/png");
 
-    // PDF page dimensions (portrait)
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
+  // Create PDF with transparent background
+  const pdf = new jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: "a4",
+  });
 
-    // Image dimensions (from HTML canvas)
-    const imgWidthPx = canvas.width;
-    const imgHeightPx = canvas.height;
+  // Get PDF dimensions
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = pdf.internal.pageSize.getHeight();
 
-    // Convert pixels → millimeters (approx. 96 DPI)
-    const pxToMm = 0.264583;
-    const imgWidthMm = imgWidthPx * pxToMm;
-    const imgHeightMm = imgHeightPx * pxToMm;
+  // Image dimensions from the canvas
+  const imgWidthPx = canvas.width;
+  const imgHeightPx = canvas.height;
 
-    // Scale image proportionally to fit inside PDF
-    const ratio = Math.min(pdfWidth / imgWidthMm, pdfHeight / imgHeightMm);
-    const finalWidth = imgWidthMm * ratio;
-    const finalHeight = imgHeightMm * ratio;
+  // Convert pixels → millimeters
+  const pxToMm = 0.264583;
+  const imgWidthMm = imgWidthPx * pxToMm;
+  const imgHeightMm = imgHeightPx * pxToMm;
 
-    // Center the image on the PDF
-    const xOffset = (pdfWidth - finalWidth) / 2;
-    const yOffset = (pdfHeight - finalHeight) / 2;
+  // Maintain aspect ratio
+  const ratio = Math.min(pdfWidth / imgWidthMm, pdfHeight / imgHeightMm);
+  const finalWidth = imgWidthMm * ratio;
+  const finalHeight = imgHeightMm * ratio;
 
-    // Add to PDF with correct scaling
-    pdf.addImage(imgData, "PNG", xOffset, yOffset, finalWidth, finalHeight);
+  // Center image in PDF
+  const xOffset = (pdfWidth - finalWidth) / 2;
+  const yOffset = (pdfHeight - finalHeight) / 2;
+  pdf.addImage(imgData, "PNG", xOffset, yOffset, finalWidth, finalHeight, undefined, "FAST");
 
-    // Save the file
-    pdf.save(`${values.name}-WeddingInvite.pdf`);
-  };
+  // Save the result
+  pdf.save(`${values.name || "WeddingInvite"}.pdf`);
+};
+
 
   return (
     <>
