@@ -18,9 +18,8 @@ const RSVP = () => {
   const downloadInvite = async () => {
     const el = document.getElementById("invite-card");
     const canvas = await html2canvas(el, {
-      scale: 3,
+      scale: 5,
       useCORS: true,
-      backgroundColor: "#fff",
     });
 
     const imgData = canvas.toDataURL("image/png");
@@ -137,8 +136,6 @@ const RSVP = () => {
             />
 
             <div className="content">
-              <h2>Invitation Card</h2>
-              <p className="names">Nii & Nuerki</p>
 
               <div className="details">
                 <p className="">
