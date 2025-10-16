@@ -471,9 +471,12 @@ const InviteCard = styled.div`
     }
 
     .details p {
-        margin: 0.06rem 0; /* default smaller spacing */
-        }
-  }
+        font-family: "Bebas Neue", sans-serif; /* example */
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        margin: 0.1rem 0; /* 🔥 drastically reduced vertical spacing */
+        line-height: 0.9rem; /*
+    }
 
   /* Very small devices (iPhone SE 2, XR in zoom mode) */
   @media (max-width: 380px) {
