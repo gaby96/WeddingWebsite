@@ -471,7 +471,7 @@ const InviteCard = styled.div`
     }
 
     .details p {
-        margin: 0.3rem 0; /* default smaller spacing */
+        margin: 0.06rem 0; /* default smaller spacing */
         }
   }
 
