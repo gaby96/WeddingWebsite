@@ -5,15 +5,45 @@ import validate from "./validateInfo";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
+const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzI4ID5IShVMyMSYV7lrvgXVEHMmDpIormaimXImtvocsX1SNXYoFvcEqY89lOeY5knBA/exec';
 const RSVP = () => {
   const { handleChange, handleSubmit, values, error } = useForm(validate);
   const [showCard, setShowCard] = useState(false);
 
-  const handleRSVPSubmit = (e) => {
-    e.preventDefault();
-    handleSubmit(e);
-    if (values.name && !error.name) setShowCard(true);
-  };
+  const handleRSVPSubmit = async (e) => {
+  e.preventDefault();
+  handleSubmit(e);
+
+  // Validate basic fields
+  if (!values.name || error.name) return;
+
+  try {
+    // 🟢 Send data to Google Sheets
+    await fetch(GOOGLE_SHEET_WEB_APP_URL, {
+      method: "POST",
+      mode: "no-cors", // required for Google Apps Script
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: values.name,
+        side: values.side,
+        message: values.message || "",
+        timestamp: new Date().toISOString(),
+      }),
+    });
+
+    console.log("✅ RSVP sent to Google Sheets!");
+    setShowCard(true); // show invite card after successful submit
+    values.name = "";
+    values.side = "";
+    values.message = "";
+  } catch (err) {
+    console.error("❌ Failed to submit RSVP:", err);
+    alert("Something went wrong while sending your RSVP. Please try again.");
+  }
+};
+
 
   const downloadInvite = async () => {
   const el = document.getElementById("invite-card");
@@ -100,7 +130,7 @@ const RSVP = () => {
                   <option value="groom">Groom</option>
                 </select>
               </FormDiv>
-              {/* <FormDiv>
+              <FormDiv>
                 <label htmlFor="message">Message</label>
                 <textarea
                   id="message"
@@ -109,7 +139,7 @@ const RSVP = () => {
                   onChange={handleChange}
                   placeholder="Leave a note for the couple"
                 ></textarea>
-              </FormDiv> */}
+              </FormDiv>
 
               <Button type="submit">Confirm Attendance</Button>
             </form>
