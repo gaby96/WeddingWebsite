@@ -5,92 +5,100 @@ import validate from "./validateInfo";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzI4ID5IShVMyMSYV7lrvgXVEHMmDpIormaimXImtvocsX1SNXYoFvcEqY89lOeY5knBA/exec';
+const GOOGLE_SHEET_WEB_APP_URL =
+  "https://script.google.com/macros/s/AKfycbzI4ID5IShVMyMSYV7lrvgXVEHMmDpIormaimXImtvocsX1SNXYoFvcEqY89lOeY5knBA/exec";
 const RSVP = () => {
   const { handleChange, handleSubmit, values, error } = useForm(validate);
   const [showCard, setShowCard] = useState(false);
 
   const handleRSVPSubmit = async (e) => {
-  e.preventDefault();
-  handleSubmit(e);
+    e.preventDefault();
+    handleSubmit(e);
 
-  // Validate basic fields
-  if (!values.name || error.name) return;
+    // Validate basic fields
+    if (!values.name || error.name) return;
 
-  try {
-    // 🟢 Send data to Google Sheets
-    await fetch(GOOGLE_SHEET_WEB_APP_URL, {
-      method: "POST",
-      mode: "no-cors", // required for Google Apps Script
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: values.name,
-        side: values.side,
-        message: values.message || "",
-        timestamp: new Date().toISOString(),
-      }),
-    });
+    try {
+      // 🟢 Send data to Google Sheets
+      await fetch(GOOGLE_SHEET_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors", // required for Google Apps Script
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: values.name,
+          side: values.side,
+          message: values.message || "",
+          timestamp: new Date().toISOString(),
+        }),
+      });
 
-    console.log("✅ RSVP sent to Google Sheets!");
-    setShowCard(true); // show invite card after successful submit
-    values.name = "";
-    values.side = "";
-    values.message = "";
-  } catch (err) {
-    console.error("❌ Failed to submit RSVP:", err);
-    alert("Something went wrong while sending your RSVP. Please try again.");
-  }
-};
-
+      console.log("✅ RSVP sent to Google Sheets!");
+      setShowCard(true); // show invite card after successful submit
+      values.name = "";
+      values.side = "";
+      values.message = "";
+    } catch (err) {
+      console.error("❌ Failed to submit RSVP:", err);
+      alert("Something went wrong while sending your RSVP. Please try again.");
+    }
+  };
 
   const downloadInvite = async () => {
-  const el = document.getElementById("invite-card");
+    const el = document.getElementById("invite-card");
 
-  // Capture the invite card exactly as displayed
-  const canvas = await html2canvas(el, {
-    scale: 4, // high quality
-    useCORS: true,
-    backgroundColor: null, // 🟡 this removes the white background
-  });
+    // Capture the invite card exactly as displayed
+    const canvas = await html2canvas(el, {
+      scale: 4, // high quality
+      useCORS: true,
+      backgroundColor: null, // 🟡 this removes the white background
+    });
 
-  const imgData = canvas.toDataURL("image/png");
+    const imgData = canvas.toDataURL("image/png");
 
-  // Create PDF with transparent background
-  const pdf = new jsPDF({
-    orientation: "portrait",
-    unit: "mm",
-    format: "a4",
-  });
+    // Create PDF with transparent background
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+    });
 
-  // Get PDF dimensions
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = pdf.internal.pageSize.getHeight();
+    // Get PDF dimensions
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
 
-  // Image dimensions from the canvas
-  const imgWidthPx = canvas.width;
-  const imgHeightPx = canvas.height;
+    // Image dimensions from the canvas
+    const imgWidthPx = canvas.width;
+    const imgHeightPx = canvas.height;
 
-  // Convert pixels → millimeters
-  const pxToMm = 0.264583;
-  const imgWidthMm = imgWidthPx * pxToMm;
-  const imgHeightMm = imgHeightPx * pxToMm;
+    // Convert pixels → millimeters
+    const pxToMm = 0.264583;
+    const imgWidthMm = imgWidthPx * pxToMm;
+    const imgHeightMm = imgHeightPx * pxToMm;
 
-  // Maintain aspect ratio
-  const ratio = Math.min(pdfWidth / imgWidthMm, pdfHeight / imgHeightMm);
-  const finalWidth = imgWidthMm * ratio;
-  const finalHeight = imgHeightMm * ratio;
+    // Maintain aspect ratio
+    const ratio = Math.min(pdfWidth / imgWidthMm, pdfHeight / imgHeightMm);
+    const finalWidth = imgWidthMm * ratio;
+    const finalHeight = imgHeightMm * ratio;
 
-  // Center image in PDF
-  const xOffset = (pdfWidth - finalWidth) / 2;
-  const yOffset = (pdfHeight - finalHeight) / 2;
-  pdf.addImage(imgData, "PNG", xOffset, yOffset, finalWidth, finalHeight, undefined, "FAST");
+    // Center image in PDF
+    const xOffset = (pdfWidth - finalWidth) / 2;
+    const yOffset = (pdfHeight - finalHeight) / 2;
+    pdf.addImage(
+      imgData,
+      "PNG",
+      xOffset,
+      yOffset,
+      finalWidth,
+      finalHeight,
+      undefined,
+      "FAST"
+    );
 
-  // Save the result
-  pdf.save(`${values.name || "WeddingInvite"}.pdf`);
-};
-
+    // Save the result
+    pdf.save(`${values.name || "WeddingInvite"}.pdf`);
+  };
 
   return (
     <>
@@ -168,7 +176,6 @@ const RSVP = () => {
             />
 
             <div className="content">
-
               <div className="details">
                 <p>
                   <strong>Name:</strong> {values.name}
@@ -180,7 +187,6 @@ const RSVP = () => {
                     ? values.side.charAt(0).toUpperCase() + values.side.slice(1)
                     : "—"}
                 </p>
-
               </div>
             </div>
           </InviteCard>
@@ -371,8 +377,6 @@ const ModalOverlay = styled.div`
   }
 `;
 
-
-
 const InviteCard = styled.div`
   position: relative;
   width: 720px;
@@ -512,30 +516,50 @@ const InviteCard = styled.div`
     }
 
   /* Very small devices (iPhone SE 2, XR in zoom mode) */
-  @media (max-width: 380px) {
+@media (max-width: 380px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* ensures full screen height */
+    margin: 0;
+    padding: 0;
+  }
+
+  .card {
     aspect-ratio: 2.8 / 4;
     border-radius: 14px;
-
-    .content {
-      padding: 1.2rem;
-    }
-
-    h2 {
-      font-size: 1.7rem;
-    }
-
-    .names {
-      font-size: 1.4rem;
-    }
-
-    .details {
-      font-size: 0.7rem;
-      width: 96%;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; /* 
+    text-align: center;
   }
+
+  .content {
+    padding: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  .names {
+    font-size: 1.4rem;
+  }
+
+  .details {
+    font-size: 0.7rem;
+    width: 96%;
+  }
+
+  .rsvp {
+    margin-top: 1rem;
+    display: block;
+  }
+}
+
 `;
-
-
 
 const ContactSection = styled.div`
   margin-top: 2rem;
