@@ -34,10 +34,12 @@ const RSVP = () => {
     });
 
     console.log("✅ RSVP sent!");
-    setShowCard(true); // show the card
+    setShowCard(true);
   } catch (err) {
     console.error("❌ Submission failed:", err);
     alert("Something went wrong. Try again later.");
+  } finally{
+    setIsSubmitting(false);
   }
   };
 
@@ -188,7 +190,14 @@ const RSVP = () => {
           </InviteCard>
           <div className="modal-buttons">
             <button onClick={downloadInvite}>Download Invite</button>
-            <button onClick={() => setShowCard(false)}>Close</button>
+            <button onClick={() => {
+              setShowCard(false);
+              setIsSubmitting(false);
+              values.name = "";
+              values.side = "";
+              values.message = "";
+            }}>Close
+          </button>
           </div>
         </ModalOverlay>
       )}
