@@ -9,6 +9,7 @@ const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzI4ID
 const RSVP = () => {
   const { handleChange, handleSubmit, values, error } = useForm(validate);
   const [showCard, setShowCard] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleRSVPSubmit = async (e) => {
   e.preventDefault();
@@ -16,6 +17,8 @@ const RSVP = () => {
 
   // Validate basic fields
   if (!values.name || error.name) return;
+
+  setIsSubmitting(true);
   
     try {
     const res = await fetch(GOOGLE_SHEET_WEB_APP_URL, {
@@ -83,6 +86,9 @@ const RSVP = () => {
 
   // Save the result
   pdf.save(`${values.name || "WeddingInvite"}.pdf`);
+  values.name = "";
+  values.side = "";
+  values.message = "";
 };
 
 
@@ -135,7 +141,9 @@ const RSVP = () => {
                 ></textarea>
               </FormDiv>
 
-              <Button type="submit">Confirm Attendance</Button>
+              <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "Submitting..." : "Confirm Attendance"}
+              </Button>
             </form>
 
             {/* ✅ NEW CONTACT SECTION */}
