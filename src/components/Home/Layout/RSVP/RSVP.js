@@ -5,7 +5,7 @@ import validate from "./validateInfo";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzI4ID5IShVMyMSYV7lrvgXVEHMmDpIormaimXImtvocsX1SNXYoFvcEqY89lOeY5knBA/exec';
+const GOOGLE_SHEET_WEB_APP_URL = '';
 const RSVP = () => {
   const { handleChange, handleSubmit, values, error } = useForm(validate);
   const [showCard, setShowCard] = useState(false);
