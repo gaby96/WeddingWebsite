@@ -10,11 +10,12 @@ import BannerOne from './Layout/Banner-1/BannerOne';
 import Event from './Layout/Event/Event';
 import WeddingDetails from './Layout/WeddingDetails/WeddingDetails';
 import Footer from './Layout/Footer/Footer';
-
+import { Analytics } from "@vercel/analytics/react";
 
 const Home = () => {
     return (
         <div>
+            <Analytics/>
             <Navbar />
             <div id="home">
                 <Header />
